@@ -1,19 +1,26 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
-// i have to add publish section 
+
+// i have to add publish section
+/*
+
+Add publish Callback Gadhiiiii
+
+*/
+
 // =========================
 // Wi-Fi
 // =========================
-const char* ssid = "Jesse";
-const char* password = "jesse123";
+const char *ssid = "Jesse";
+const char *password = "jesse123";
 
 // =========================
 // MQTT
 // =========================
-const char* mqtt_server = "broker.hivemq.com";
+const char *mqtt_server = "broker.hivemq.com";
 const int mqtt_port = 1883;
 
-const char* commandTopic = "smart_switch/command";
+const char *commandTopic = "smart_switch/command";
 
 // =========================
 // GPIO
@@ -23,7 +30,6 @@ const int switchPin = 5;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
-
 
 // =========================
 // Function: Control Switch
@@ -54,11 +60,10 @@ void controlSwitch(String command)
   }
 }
 
-
 // =========================
 // MQTT Callback
 // =========================
-void callback(char* topic, byte* payload, unsigned int length)
+void callback(char *topic, byte *payload, unsigned int length)
 {
   Serial.print("Message received on topic: ");
   Serial.println(topic);
@@ -76,7 +81,6 @@ void callback(char* topic, byte* payload, unsigned int length)
   // Process MQTT command
   controlSwitch(message);
 }
-
 
 // =========================
 // MQTT Reconnect
@@ -106,7 +110,6 @@ void reconnectMQTT()
   }
 }
 
-
 // =========================
 // Setup
 // =========================
@@ -123,7 +126,6 @@ void setup()
   digitalWrite(switchPin, LOW);
 
   Serial.println("Switch initialized: OFF");
-
 
   // =========================
   // Wi-Fi
@@ -145,7 +147,6 @@ void setup()
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
 
-
   // =========================
   // MQTT
   // =========================
@@ -153,7 +154,6 @@ void setup()
 
   client.setCallback(callback);
 }
-
 
 // =========================
 // Main Loop
@@ -171,7 +171,6 @@ void loop()
 
   // Process MQTT messages
   client.loop();
-
 
   // =========================
   // Serial Monitor Control
