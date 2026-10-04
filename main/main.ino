@@ -168,7 +168,7 @@ void loop()
 
     reconnectMQTT();
   }
-// This is a comment
+
   // Process MQTT messages
   client.loop();
 
